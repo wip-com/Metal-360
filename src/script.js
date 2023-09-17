@@ -13,12 +13,10 @@ THREE.ColorManagement.enabled = false;
 /**
  * PATHS
  */
-const dracoPath =
-  "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1.2/dist/draco/";
-const texturePath =
-  "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1.2/dist/textures/matcaps/12.png";
-const modelPath =
-  "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1.2/dist/models/escalier-v2.glb";
+const distPath = "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1.2/dist";
+const dracoPath = "./draco/";
+const texturePath = "./textures/matcaps/12.png";
+const modelPath = "./models/escalier-v2.glb";
 
 /**
  * Add CANVAS to body
