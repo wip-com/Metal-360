@@ -11,6 +11,16 @@ gsap.registerPlugin(ScrollTrigger);
 THREE.ColorManagement.enabled = false;
 
 /**
+ * PATHS
+ */
+const dracoPath =
+  "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1/dist/draco/";
+const texturePath =
+  "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1/dist/textures/matcaps/12.png";
+const modelPath =
+  "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1/dist/models/escalier-v2.glb";
+
+/**
  * Add CANVAS to body
  */
 const body = document.querySelector("body");
@@ -29,8 +39,9 @@ const loadingManager = new THREE.LoadingManager(() => {
     value: 0,
   });
 });
+
 const dracoLoader = new DRACOLoader(loadingManager);
-dracoLoader.setDecoderPath("/draco/");
+dracoLoader.setDecoderPath(dracoPath);
 
 const gltfLoader = new GLTFLoader(loadingManager);
 gltfLoader.setDRACOLoader(dracoLoader);
@@ -89,7 +100,7 @@ const scene = new THREE.Scene();
  */
 // Texture
 const textureLoader = new THREE.TextureLoader();
-const matcapTexture = textureLoader.load("/textures/matcaps/12.png");
+const matcapTexture = textureLoader.load(texturePath);
 
 /**
  * Overlay
@@ -130,7 +141,7 @@ material.matcap = matcapTexture;
 /**
  * Models
  */
-gltfLoader.load("/models/escalier-v2.glb", (gltf) => {
+gltfLoader.load(modelPath, (gltf) => {
   gltf.scene.traverse((child) => {
     child.material = material;
   });
