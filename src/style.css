@@ -12,6 +12,7 @@ main {
 body {
   position: relative;
 }
+
 .webgl {
   position: fixed;
   top: 0;

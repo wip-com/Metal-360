@@ -521,13 +521,13 @@ const modelPath =
   "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1/dist/models/escalier-v2.glb";
 
 /**
- * Add CANVAS to body
+ * Add CANVAS to main page
  */
-const body = document.querySelector("body");
+const main = document.querySelector(".page_main");
 const creatCanvas = document.createElement("canvas");
 creatCanvas.classList.add("webgl");
 
-body.appendChild(creatCanvas);
+main.appendChild(creatCanvas);
 
 /**
  * Loaders
@@ -545,45 +545,10 @@ dracoLoader.setDecoderPath(dracoPath);
 const gltfLoader = new GLTFLoader(loadingManager);
 gltfLoader.setDRACOLoader(dracoLoader);
 
-// SmoothScroll Lenis
-const lenis = new Lenis({
-  lerp: 0.1,
-  wheelMultiplier: 0.7,
-  infinite: false,
-  gestureOrientation: "vertical",
-  smoothWheel: true,
-  normalizeWheel: false,
-  smoothTouch: false,
-});
-
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
-
-function connectToScrollTrigger() {
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-}
-// Uncomment this if using GSAP ScrollTrigger
-connectToScrollTrigger();
-
 /**
  * Debug
  */
-const gui = new dat.GUI();
-
-const parameters = {
-  materialColor: "#ffeded",
-};
-
-gui.addColor(parameters, "materialColor").onChange(() => {
-  material.color.set(parameters.materialColor);
-  particlesMaterial.color.set(parameters.materialColor);
-});
+//const gui = new dat.GUI();
 
 /**
  * Base
@@ -631,11 +596,6 @@ scene.add(overlay);
 // Material
 const material = new THREE.MeshMatcapMaterial();
 material.matcap = matcapTexture;
-
-// Models
-// const mesh1 = new THREE.Mesh(new THREE.TorusGeometry(1, 0.4, 16, 60), material);
-// mesh1.position.x = 2;
-// scene.add(mesh1);
 
 /**
  * Models
@@ -734,13 +694,13 @@ gltfLoader.load(modelPath, (gltf) => {
     scrollTrigger: {
       trigger: ".section_team",
       scrub: true,
-      start: "top 75%",
-      end: "top 20%",
+      start: "top bottom",
+      end: "top 75%",
       //markers: true,
     },
   });
   tl3.to(
-    gltf.scene,
+    canvas,
     {
       opacity: 0,
       ease: "none",
@@ -799,15 +759,6 @@ const renderer = new THREE.WebGLRenderer({
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-/**
- * Scroll
- */
-let scrollY = window.scrollY;
-
-window.addEventListener("scroll", () => {
-  scrollY = window.scrollY;
-});
 
 /**
  * Cursor
