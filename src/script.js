@@ -2,14 +2,14 @@ import * as THREE from "three";
 import * as dat from "lil-gui";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader";
-import MouseFollower from "mouse-follower";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { CustomEase } from "gsap/CustomEase";
+// import { gsap } from "gsap";
+// import { ScrollTrigger } from "gsap/ScrollTrigger";
+// import { CustomEase } from "gsap/CustomEase";
+// import MouseFollower from "mouse-follower";
 import SplitType from "split-type";
 import Lenis from "@studio-freight/lenis";
 
-gsap.registerPlugin(ScrollTrigger, CustomEase);
+// gsap.registerPlugin(ScrollTrigger, CustomEase);
 
 // WAIT FOR PAGE LOADING FUNCTION
 window.addEventListener("DOMContentLoaded", (event) => {
@@ -708,6 +708,7 @@ gltfLoader.load(modelPath, (gltf) => {
       gltf.scene.rotation,
       {
         y: "+=6.2",
+        x: "+=0.5",
         ease: "none",
       },
       0
@@ -716,6 +717,7 @@ gltfLoader.load(modelPath, (gltf) => {
       gltf.scene.position,
       {
         x: "+=3",
+        y: "-=1",
         ease: "none",
       },
       0
@@ -723,11 +725,28 @@ gltfLoader.load(modelPath, (gltf) => {
     .to(
       camera.position,
       {
-        z: 3,
+        z: 6,
         ease: "none",
       },
       0
     );
+  const tl3 = gsap.timeline({
+    scrollTrigger: {
+      trigger: ".section_team",
+      scrub: true,
+      start: "top 75%",
+      end: "top 20%",
+      //markers: true,
+    },
+  });
+  tl3.to(
+    gltf.scene,
+    {
+      opacity: 0,
+      ease: "none",
+    },
+    0
+  );
 });
 
 /**
@@ -815,7 +834,7 @@ const tick = () => {
 
   // Animate camera
   //camera.position.y = -scrollY / sizes.height;
-  const parallaxX = cursor.x * 0.5;
+  const parallaxX = cursor.x * 0.1;
   const parallaxY = -cursor.y * 0.1;
   cameraGroup.position.x +=
     (parallaxX - cameraGroup.position.x) * 5 * deltaTime;
