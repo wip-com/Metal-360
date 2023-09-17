@@ -13,16 +13,17 @@ THREE.ColorManagement.enabled = false;
 /**
  * PATHS
  */
-const distPath = "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1.2/dist";
-const dracoPath = "./draco/";
-const texturePath = "./textures/matcaps/12.png";
-const modelPath = "./models/escalier-v2.glb";
+const dracoPath =
+  "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1/dist/draco/";
+const texturePath =
+  "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1/dist/textures/matcaps/12.png";
+const modelPath =
+  "https://cdn.jsdelivr.net/gh/wip-com/Metal-360@v1/dist/models/escalier-v2.glb";
 
 /**
  * Add CANVAS to body
  */
 const body = document.querySelector("body");
-
 const creatCanvas = document.createElement("canvas");
 creatCanvas.classList.add("webgl");
 
