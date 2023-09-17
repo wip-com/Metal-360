@@ -694,8 +694,8 @@ gltfLoader.load(modelPath, (gltf) => {
     scrollTrigger: {
       trigger: ".section_team",
       scrub: true,
-      start: "top bottom",
-      end: "top 75%",
+      start: "top 75%",
+      end: "top 20%",
       //markers: true,
     },
   });
