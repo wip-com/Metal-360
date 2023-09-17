@@ -30,37 +30,36 @@ window.addEventListener("DOMContentLoaded", (event) => {
   // INIT SCROLL AND LOADING
   ("use strict"); // fix lenis in safari
 
-  if (Webflow.env("editor") === undefined) {
-    //--------------//
-    // LENIS SCROLL //
-    //--------------//
-    const lenis = new Lenis({
-      lerp: 0.1,
-      wheelMultiplier: 0.7,
-      infinite: false,
-      gestureOrientation: "vertical",
-      smoothWheel: true,
-      normalizeWheel: false,
-      smoothTouch: false,
-    });
+  // if (Webflow.env("editor") === undefined) {
+  //--------------//
+  // LENIS SCROLL //
+  //--------------//
+  const lenis = new Lenis({
+    lerp: 0.1,
+    wheelMultiplier: 0.7,
+    infinite: false,
+    gestureOrientation: "vertical",
+    smoothWheel: true,
+    normalizeWheel: false,
+    smoothTouch: false,
+  });
 
-    function raf(time) {
-      //parallax.animate();
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+  function raf(time) {
+    //parallax.animate();
+    lenis.raf(time);
     requestAnimationFrame(raf);
-
-    function connectToScrollTrigger() {
-      lenis.on("scroll", ScrollTrigger.update);
-      gsap.ticker.add((time) => {
-        lenis.raf(time * 1000);
-      });
-      console.log("lenis connect to scrolltrigger");
-    }
-    // Uncomment this if using GSAP ScrollTrigger
-    connectToScrollTrigger();
   }
+  requestAnimationFrame(raf);
+
+  function connectToScrollTrigger() {
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    console.log("lenis connect to scrolltrigger");
+  }
+  // Uncomment this if using GSAP ScrollTrigger
+  connectToScrollTrigger();
 
   // LENIS SCROLL TOP AND STOP
   function topAndStop() {
