@@ -60,49 +60,49 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
     // Uncomment this if using GSAP ScrollTrigger
     connectToScrollTrigger();
+  }
 
-    // LENIS SCROLL TOP AND STOP
-    function topAndStop() {
-      // Function to scroll to the top of the window
-      // SCROLL TOP
-      $(document).ready(function () {
-        $(this).scrollTop(0);
-      });
-      // Wait for the scrolling animation to finish and then call scrollStop()
-      setTimeout(lenis.stop(), 10);
-    }
+  // LENIS SCROLL TOP AND STOP
+  function topAndStop() {
+    // Function to scroll to the top of the window
+    // SCROLL TOP
+    $(document).ready(function () {
+      $(this).scrollTop(0);
+    });
+    // Wait for the scrolling animation to finish and then call scrollStop()
+    setTimeout(lenis.stop(), 10);
+  }
 
-    // LENIS SCROLL START
-    function scrollStart() {
-      lenis.start();
-      console.log("Start of header animation and scroll start !");
-    }
+  // LENIS SCROLL START
+  function scrollStart() {
+    lenis.start();
+    console.log("Start of header animation and scroll start !");
+  }
 
-    // LENIS SCROLL TO
-    // Grab all elements that have a "data-target" attribute
-    const scrollButtons = document.querySelectorAll("[data-target]");
+  // LENIS SCROLL TO
+  // Grab all elements that have a "data-target" attribute
+  const scrollButtons = document.querySelectorAll("[data-target]");
 
-    // For each element, listen to a "click" event
-    scrollButtons.forEach((button) => {
-      button.addEventListener("click", (e) => {
-        e.preventDefault();
+  // For each element, listen to a "click" event
+  scrollButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
 
-        // get the DOM element by the ID (data-target value)
-        var target = button.dataset.target,
-          immediate = "immediate" in button.dataset !== -1 ? true : false,
-          $el = document.getElementById(target.replace("#", ""));
+      // get the DOM element by the ID (data-target value)
+      var target = button.dataset.target,
+        immediate = "immediate" in button.dataset !== -1 ? true : false,
+        $el = document.getElementById(target.replace("#", ""));
 
-        // Use lenis.scrollTo() to scroll the page to the right element
-        lenis.scrollTo($el, {
-          offset: 0,
-          immediate: immediate,
-          duration: 2,
-          easing: (x) =>
-            x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, // https://easings.net
-        });
+      // Use lenis.scrollTo() to scroll the page to the right element
+      lenis.scrollTo($el, {
+        offset: 0,
+        immediate: immediate,
+        duration: 2,
+        easing: (x) =>
+          x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2, // https://easings.net
       });
     });
-  }
+  });
 
   //-------------------//
   // LOADING ANIMATION //
