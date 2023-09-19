@@ -245,27 +245,29 @@ window.addEventListener("DOMContentLoaded", (event) => {
   };
 
   // CURSOR
-  mm.add("(min-width: 991px)", () => {
-    const cursor = new MouseFollower({
-      speed: 0.6,
-      ease: "expo.out",
-      stickDelta: 0,
-      skewing: 0.1,
-      hiddenState: "-hidden",
-      textState: "-text",
-      iconState: "-icon",
-      activeState: "-active",
-      mediaState: "-media",
-    });
-    console.log("cursor init");
+  const setupMouse = () => {
+    mm.add("(min-width: 991px)", () => {
+      const cursor = new MouseFollower({
+        speed: 0.6,
+        ease: "expo.out",
+        stickDelta: 0,
+        skewing: 0.1,
+        hiddenState: "-hidden",
+        textState: "-text",
+        iconState: "-icon",
+        activeState: "-active",
+        mediaState: "-media",
+      });
+      console.log("cursor init");
 
-    return () => {
-      // optional
-      // custom cleanup code here (runs when it STOPS matching)
-      cursor.destroy();
-      console.log("cursor is destroy");
-    };
-  });
+      return () => {
+        // optional
+        // custom cleanup code here (runs when it STOPS matching)
+        cursor.destroy();
+        console.log("cursor is destroy");
+      };
+    });
+  };
 
   //-- OVERLAY MENU --//
   const overlayMenu = () => {
@@ -501,7 +503,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   document.body.classList.remove("loading");
   //initAndLoading();
   initUtils();
-  //setupMouse();
+  setupMouse();
   overlayMenu();
   initMarqueeParlons();
 });
