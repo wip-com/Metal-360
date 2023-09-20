@@ -373,6 +373,74 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   };
 
+  //-- DROPDOWN WORKS MENU --//
+  const dropdownMenu = () => {
+    const dropdown = document.getElementById("dropdown-works");
+    const dropdownBtn = document.querySelectorAll("[open-dropdown]");
+    let isOpen = false;
+
+    if (dropdown) {
+      if (dropdownBtn.length > 0) {
+        gsap.set(dropdown, { y: "-101vh", display: "flex", autoAlpha: 0 });
+        mm.add("(min-width: 991px)", () => {
+          dropdownBtn.forEach((item) => {
+            item.open = () => {
+              if (!isOpen) {
+                isOpen = true;
+                const tl = gsap.timeline({
+                  defaults: { overwrite: true },
+                  onStart: () => {
+                    item.setAttribute("aria-expanded", "true");
+                    dropdown.setAttribute("aria-hidden", "false");
+                  },
+                });
+
+                tl.to(
+                  dropdown,
+                  {
+                    duration: 1,
+                    ease: "power4.out",
+                    y: 0,
+                    autoAlpha: 1,
+                  },
+                  0
+                );
+              }
+            };
+            item.close = () => {
+              if (isOpen) {
+                isOpen = false;
+                const tl = gsap.timeline({
+                  defaults: { overwrite: true },
+                  onStart: () => {
+                    item.setAttribute("aria-expanded", "false");
+                    dropdown.setAttribute("aria-hidden", "true");
+                  },
+                });
+                tl.to(
+                  dropdown,
+                  {
+                    duration: 1,
+                    ease: "power4.out",
+                    y: "-101vh",
+                    autoAlpha: 0,
+                  },
+                  0
+                );
+              }
+            };
+            item.addEventListener("mouseenter", () => {
+              item.open();
+            });
+            item.addEventListener("mouseleave", () => {
+              item.close();
+            });
+          });
+        });
+      }
+    }
+  };
+
   // MARQUEE POWER-UP
   const initMarqueeParlons = () => {
     function attr(defaultVal, attrVal) {
@@ -505,6 +573,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   initUtils();
   setupMouse();
   overlayMenu();
+  dropdownMenu();
   initMarqueeParlons();
 });
 
